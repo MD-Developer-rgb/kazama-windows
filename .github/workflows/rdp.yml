@@ -92,7 +92,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Storage Booster
-        if: inputs.boost != 'off'
+        if: inputs.boost = 'off'
         run: ./windows/kazama-booster.ps1 -Mode '${{ inputs.boost }}' -Language '${{ inputs.language }}' -Keep "$env:KZ_KEEP" -Quiet -NoPause
 
       - name: Set up RDP
