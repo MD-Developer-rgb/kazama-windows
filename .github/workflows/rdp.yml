@@ -16,7 +16,7 @@ on:
       boost:
         description: "Storage Booster: safe = caches | deep = + system leftovers | max = + removes apps/SDKs (Edge, Unity, R, Haskell, Visual Studio...)"
         type: choice
-        default: max
+        default: off
         options: ["off", "safe", "deep", "max"]
       nla:
         description: "Network Level Authentication. Turn OFF only to troubleshoot 'credentials rejected' errors (safe only over Tailscale)"
@@ -92,7 +92,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Storage Booster
-        if: inputs.boost = 'off'
+        if: inputs.boost != 'off'
         run: ./windows/kazama-booster.ps1 -Mode '${{ inputs.boost }}' -Language '${{ inputs.language }}' -Keep "$env:KZ_KEEP" -Quiet -NoPause
 
       - name: Set up RDP
